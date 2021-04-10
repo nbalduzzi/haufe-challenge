@@ -1,0 +1,555 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"IPingResponse": {
+				"properties": {
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IAuthResponse": {
+				"properties": {
+					"userId": {
+						"type": "string"
+					},
+					"username": {
+						"type": "string"
+					},
+					"access_token": {
+						"type": "string"
+					},
+					"timestamp": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"userId",
+					"username",
+					"access_token",
+					"timestamp"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IAuthLoginRequest": {
+				"properties": {
+					"username": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"username",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserStatus": {
+				"enum": [
+					"OK",
+					"DELETED",
+					"BANNED"
+				],
+				"type": "string"
+			},
+			"IUser": {
+				"properties": {
+					"userId": {
+						"type": "string"
+					},
+					"username": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"status": {
+						"$ref": "#/components/schemas/UserStatus"
+					},
+					"lastConnection": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"userId",
+					"username",
+					"password",
+					"status",
+					"lastConnection"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IUserRegister": {
+				"properties": {
+					"username": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"username",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CharacterStatus": {
+				"enum": [
+					"Alive",
+					"Dead",
+					"unknown"
+				],
+				"type": "string"
+			},
+			"CharacterGender": {
+				"enum": [
+					"Female",
+					"Male",
+					"Genderless",
+					"unknown"
+				],
+				"type": "string"
+			},
+			"ICharacterOrigin": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"url": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"url"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ICharacterLocation": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"url": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"url"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ICharacter": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"status": {
+						"$ref": "#/components/schemas/CharacterStatus"
+					},
+					"species": {
+						"type": "string"
+					},
+					"type": {
+						"type": "string"
+					},
+					"gender": {
+						"$ref": "#/components/schemas/CharacterGender"
+					},
+					"origin": {
+						"$ref": "#/components/schemas/ICharacterOrigin"
+					},
+					"location": {
+						"$ref": "#/components/schemas/ICharacterLocation"
+					},
+					"image": {
+						"type": "string"
+					},
+					"episode": {
+						"type": "number",
+						"format": "double"
+					},
+					"url": {
+						"type": "string"
+					},
+					"created": {
+						"type": "string"
+					},
+					"isFavorite": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"status",
+					"species",
+					"type",
+					"gender",
+					"origin",
+					"location",
+					"image",
+					"episode",
+					"url",
+					"created",
+					"isFavorite"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"PagedResponse_ICharacter_": {
+				"properties": {
+					"info": {
+						"properties": {
+							"prev": {
+								"type": "string"
+							},
+							"next": {
+								"type": "string"
+							},
+							"pages": {
+								"type": "number",
+								"format": "double"
+							},
+							"count": {
+								"type": "number",
+								"format": "double"
+							}
+						},
+						"required": [
+							"pages",
+							"count"
+						],
+						"type": "object"
+					},
+					"results": {
+						"items": {
+							"$ref": "#/components/schemas/ICharacter"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"info",
+					"results"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IFavorite": {
+				"properties": {
+					"userId": {
+						"type": "string"
+					},
+					"characterId": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"userId",
+					"characterId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {
+			"api_key": {
+				"type": "apiKey",
+				"in": "header",
+				"name": "authorization"
+			}
+		}
+	},
+	"info": {
+		"title": "haufe-challenge-api",
+		"version": "1.0.0",
+		"description": "Haufe Challenge API",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {
+			"name": "Nicolas Balduzzi"
+		}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/ping": {
+			"get": {
+				"operationId": "GetPong",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IPingResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"healthcheck"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/auth/login": {
+			"post": {
+				"operationId": "Login",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IAuthResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"security"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IAuthLoginRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/register": {
+			"post": {
+				"operationId": "Register",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IUser"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"security"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IUserRegister"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/characters": {
+			"get": {
+				"operationId": "GetPagedCharacters",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PagedResponse_ICharacter_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"characters"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "page",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/characters/{id}": {
+			"get": {
+				"operationId": "GetCharacterById",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ICharacter"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"characters"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/favorites": {
+			"get": {
+				"operationId": "GetUserFavorites",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/IFavorite"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"favorites"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/favorites/{characterId}": {
+			"put": {
+				"operationId": "AddUserFavorite",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IFavorite"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"favorites"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "characterId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "RemoveUserFavorite",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"favorites"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "characterId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}

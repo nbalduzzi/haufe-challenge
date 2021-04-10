@@ -1,0 +1,30 @@
+services:
+    api:
+        build: .
+        container_name: haufe-challenge-api
+        depends_on:
+            - mongo
+        ports:
+            - "3000:3000"
+        environment:
+            MONGODB_URI: mongodb://mongo:27017
+        networks:
+            - haufe_challenge
+
+    mongo:
+        image: mongo
+        restart: always
+        container_name: mongo_haufe
+        environment:
+            MONGO_INITDB_DATABASE: haufe
+            MONGO_INITDB_ROOT_USERNAME: haufe
+            MONGO_INITDB_ROOT_PASSWORD: haufe
+        ports:
+            - "27017:27017"
+        networks:
+            - haufe_challenge
+
+networks:
+    haufe_challenge:
+        name: haufe_challenge
+        driver: bridge
