@@ -22,6 +22,8 @@ This API was built on NodeJS and Typescript.
 4. The `.env.production` file is in the repository and the information inside is the same as `.env.development` for challenge purpose, but this must not be like this. The production enviroment variables must be in some `vpc` or some secured storage and encrypted, and must be injected (or replaced) on deploy step.
 The `SECRET` inside must be different of `development env`, the `RICK_AND_MORTY_API_URL` should point to the production url *(if have one)* and the `MONGODB` variables must be all different as `development env` and that mongo must be in a sharded cluster for distribute across multiple machines.
 
+5. I encapsulate the data response from the rick and morty public api to hiden the external api structure.
+
 ## Docker
 
 Build the image:
@@ -136,6 +138,8 @@ PORT=8082 npm run dev
 ### Documentation
 
 When dev server is running, you can access to the API Swagger Documentation on [`http://localhost:3000/api`](http://localhost:3000/api)
+
+> **It's Only avilable on dev running instance**
 
 ## Test
 
