@@ -18,6 +18,9 @@ export default class UserRepository implements IUserRepository {
 
     public async addUser(user: IUser): Promise<IUser> {
         try {
+            const userExists: IUser | undefined = await this.getUserByUsername(user.username);
+            if (userExists) throw { statusCode: 400, message: 'user already exists' };
+
             const doc: IUserDocument = await UserModel.create({ ...user, userId: v4() });
             return doc.toJSON();
         } catch (e) {

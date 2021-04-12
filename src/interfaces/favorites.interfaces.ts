@@ -7,10 +7,10 @@ export interface IFavoriteRepository {
 
 export interface IFavoriteService {
     getUserFavorites(userId: string): Promise<IFavorite[]>;
-    getUserFavorite(userId: string, characterId: string): Promise<IFavorite | undefined>;
+    getUserFavorite(userId: string, characterId: string): Promise<IFavorite>;
     addUserFavorite(userId: string, characterId: string): Promise<IFavorite>;
     removeUserFavorite(userId: string, characterId: string): Promise<void>;
-    isFavorite(characterId: string, userId?: string): Promise<boolean>;
+    isFavorite(characterId: string, userId: string): Promise<boolean>;
 }
 
 export interface IFavorite {

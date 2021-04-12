@@ -18,9 +18,9 @@ export enum UserStatus {
 }
 
 export interface IUser {
-    userId: string;
+    userId?: string;
     username: string;
-    password: string;
+    password?: string;
     status: UserStatus;
     lastConnection: number;
 }

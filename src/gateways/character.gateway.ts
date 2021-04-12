@@ -4,11 +4,15 @@ import { ICharacterGateway, PagedResponse } from '../interfaces/characters.inter
 
 @Singleton
 export default class CharacterGateway implements ICharacterGateway {
-    public readonly API_URL: string = 'https://rickandmortyapi.com/api/character'; // TODO: change this to env
+    private readonly apiUrl: string;
+
+    constructor() {
+        this.apiUrl = `${process.env.RICK_AND_MORTY_API_URL}/character`;
+    }
 
     public async getData(page?: string): Promise<PagedResponse<any>> {
         try {
-            const response: Response = await fetch(`${this.API_URL}?page=${page ? +page : 0}`);
+            const response: Response = await fetch(`${this.apiUrl}?page=${page ? +page : 0}`);
             return await response.json();
         } catch (e) {
             console.error('CharacterGateway.getData', e);
@@ -18,7 +22,7 @@ export default class CharacterGateway implements ICharacterGateway {
 
     public async getById(id: string): Promise<any> {
         try {
-            const response: Response = await fetch(`${this.API_URL}/${id}`);
+            const response: Response = await fetch(`${this.apiUrl}/${id}`);
 
             if (response.status === 404) throw { statusCode: response.status, message: response.statusText };
             return await response.json();

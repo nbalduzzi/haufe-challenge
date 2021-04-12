@@ -7,7 +7,7 @@ const FavoriteSchema: Schema = new Schema(
     },
     {
         toJSON: {
-            transform: (ret: any) => {
+            transform: (_: any, ret: any) => {
                 delete ret._id;
                 delete ret.__v;
             },

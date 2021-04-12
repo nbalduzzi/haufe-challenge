@@ -14,12 +14,15 @@ export default class UserService implements IUserService {
             const user: IUser = {
                 userId: v4(),
                 username,
-                password: createHash('sha256').update(password).digest('base64'),
                 lastConnection: Date.now(),
                 status: UserStatus.OK,
             };
 
-            await this.repository.addUser(user);
+            await this.repository.addUser({
+                ...user,
+                password: createHash('sha256').update(password).digest('base64'),
+            });
+
             return user;
         } catch (e) {
             console.error('UserService.register', e);

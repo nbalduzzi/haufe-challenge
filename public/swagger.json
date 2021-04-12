@@ -89,7 +89,6 @@
 				"required": [
 					"userId",
 					"username",
-					"password",
 					"status",
 					"lastConnection"
 				],

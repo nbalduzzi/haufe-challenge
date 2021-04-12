@@ -3,14 +3,17 @@ import { Schema } from 'mongoose';
 const UserSchema: Schema = new Schema(
     {
         userId: String,
-        username: String,
+        username: {
+            type: String,
+            unique: true,
+        },
         password: String,
         status: String,
         lastConnection: Number,
     },
     {
         toJSON: {
-            transform: (ret: any) => {
+            transform: (_: any, ret: any) => {
                 delete ret._id;
                 delete ret.__v;
             },

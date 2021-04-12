@@ -22,9 +22,9 @@ export default class AuthController extends Controller {
             if (await this.service.isAuthorized(user, password)) {
                 this.userService.updateLastConnection(username);
                 return {
-                    userId: user.userId,
+                    userId: user.userId!,
                     username,
-                    access_token: this.service.generateToken(user.userId),
+                    access_token: this.service.generateToken(user.userId!),
                     timestamp: Date.now(),
                 };
             }
