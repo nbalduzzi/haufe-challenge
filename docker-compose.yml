@@ -21,10 +21,11 @@ services:
             MONGO_INITDB_ROOT_PASSWORD: haufe
         ports:
             - "27017:27017"
+        volumes:
+            - ./mongodata:/data/db
         networks:
             - haufe_challenge
 
 networks:
     haufe_challenge:
         name: haufe_challenge
-        driver: bridge
