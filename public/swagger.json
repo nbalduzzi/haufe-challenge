@@ -87,7 +87,6 @@
 					}
 				},
 				"required": [
-					"userId",
 					"username",
 					"status",
 					"lastConnection"
